@@ -1,0 +1,1 @@
+{"dependencies":{"ejs":"^3.1.10","express":"^5.1.0","node":"^22.19.0","node-email-verifier":"^3.4.1","nodemon":"^3.1.10","recaptcha-verify":"^0.1.1"}}
