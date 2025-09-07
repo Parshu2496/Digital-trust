@@ -26,7 +26,9 @@ app.get('/emailvalidator', (req, res) => {
 app.get('/captcha', (req, res) => {
   res.render('captcha.ejs');
 });
-
+app.get('/information',(req,res)=>{
+  res.render('information.ejs')
+})
 // Verify reCAPTCHA on captcha form submission
 var Recaptcha = require('recaptcha-verify');
 var recaptcha = new Recaptcha({
