@@ -10,32 +10,65 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
- res.render('home.ejs');
+  res.render('home.ejs');
 });
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);
 });
 
-app.get('/emailvalidator',(req,res)=>{
-  res.render('emailvalidator.ejs')
-})
-app.get('/captcha',(req,res)=>{
-  res.render('captcha.ejs')
-})
+app.get('/emailvalidator', (req, res) => {
+  res.render('emailvalidator.ejs');
+});
 
-// app.post("/", async (req, res) => {
-//     let {uname} = await req.body;
-//     console.log(`User Name: ${uname}\n`);
-//     validateWithDisposableCheck(uname)
-//     getDetailedValidation(uname)
-//     validateWithCustomOptions(uname)
-//     validateFormatOnly(uname)
-//     // res.redirect('/')
-// });
+// Render the captcha form with reCAPTCHA
+app.get('/captcha', (req, res) => {
+  res.render('captcha.ejs');
+});
 
+// Verify reCAPTCHA on captcha form submission
+var Recaptcha = require('recaptcha-verify');
+var recaptcha = new Recaptcha({
+    secret: "6LflKcErAAAAAIQVg2kDWGghWVIEJABm9OPetSFX",
+    verbose: true
+});
+app.get('/check', function(req, res){
+    // get the user response (from reCAPTCHA)
+    var userResponse = req.query['g-recaptcha-response'];
+    recaptcha.checkResponse(userResponse, function(error, response){
+        if(error){
+            // an internal error?
+            res.status(400).render('400', {
+                message: error.toString()
+            });
+            return;
+        }
+        if(response.success){
+            console.log("hello")
+            // save session.. create user.. save form data.. render page, return json.. etc.
+        }else{
+            res.status(200).send('the user is a ROBOT :(');
+            // show warning, render page, return a json, etc.
+        }
+    });
+});
+app.post('/validate-captcha', (req, res) => {
+  const { uname, captchaResponse } = req.body;
+  if (!captchaResponse) {
+    return res.status(400).json({ message: 'Captcha response is required' });
+  }
+  recaptcha.checkResponse(captchaResponse, function(error, response) {
+    if (error) {
+      return res.status(400).json({ message: 'Error validating captcha' });
+    }
+    if (response.success) {
+      res.json({ message: 'You are human' });
+    } else {
+      res.json({ message: 'You are a robot' });
+    }
+  });
+});
 app.post('/validate-email', async (req, res) => {
     const { uname } = req.body;
     try {
