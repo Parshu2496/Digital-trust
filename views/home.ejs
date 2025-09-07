@@ -5,24 +5,110 @@
     <meta name="viewport" ,initial-scale=1.0 />
     <title>Home</title>
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-      crossorigin="anonymous"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+    crossorigin="anonymous"
     />
     <style>
+      /* @import "tailwindcss"; */
+      body {
+        font-family: 'Inter', sans-serif;
+      }
+      .hero-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+      .feature-card {
+        transition: transform 0.3s ease;
+      }
+      .feature-card:hover {
+        transform: translateY(-10px);
+      }
+      </style>
+    <style>
+      
       body{
         background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 27%, rgba(0, 212, 255, 1) 100%);
       }
       </style>
+      <script src="https://cdn.tailwindcss.com"></script>
     <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"
     ></script>
   </head>
-  <body>
-    <%- include('nav') %>
-  </body>
+  <%- include('nav') %>
+ <body class="bg-gray-50 text-gray-800">
+
+    <section class="hero-bg text-white py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl font-bold mb-6">Welcome to DigitalTrust</h1>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">
+                Your go-to platform for secure digital trust tools. Safeguard your online presence with our innovative solutions designed for efficiency and reliability.
+            </p>
+            <div class="bg-white bg-opacity-20 p-6 rounded-lg shadow-lg max-w-md mx-auto">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6de27bcf-b972-4e43-823d-73150f07271e.png" alt="Illustrative image of a secure digital environment with locks, shields, and interconnecting nodes representing trust and security in online spaces" class="rounded-lg mb-4" />
+                <p class="text-lg">Experience unparalleled security and ease.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12">Our Core Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+                <!-- Email Validator Feature -->
+                <div class="feature-card bg-gradient-to-br from-green-400 to-blue-500 p-8 rounded-xl shadow-lg text-white">
+                    <h3 class="text-3xl font-semibold mb-4"><a href="emailvalidator">Email Validator</a></h3>
+                    <p class="mb-6 text-lg">
+                        Ensure the authenticity and deliverability of your email addresses with our advanced email validation tool. Eliminate ineffective contacts and enhance your communication strategies.
+                    </p>
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/275d7e44-9c25-44dc-bcb3-ceb5aa80523a.png" alt="Graphic representation of email validation with icons of envelopes, checkmarks, and arrows showing the process of verifying email authenticity" class="rounded-lg" />
+                </div>
+
+                <!-- Captcha Solver Feature -->
+                <div class="feature-card bg-gradient-to-br from-purple-500 to-pink-500 p-8 rounded-xl shadow-lg text-white">
+                    <h3 class="text-3xl font-semibold mb-4"><a href="/captcha">Captcha Solver</a> </h3>
+                    <p class="mb-6 text-lg">
+                        Overcome captcha challenges effortlessly with our intelligent solver. Designed to streamline automated processes while maintaining security standards.
+                    </p>
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/febe0651-8bbe-4fd3-9a20-b9c734ae2d17.png" alt="Visual of captcha puzzles being solved with AI elements, gears, and digital locks unlocking to represent solving mechanisms" class="rounded-lg" />
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="py-20 hero-bg text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-6">Build Trust in the Digital World</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">
+                Join thousands of users who rely on DigitalTrust for their online security needs. Simple, effective, and trustworthy solutions at your fingertips.
+            </p>
+            <a href="/information" class="bg-white text-purple-600 px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:bg-gray-100 transition">
+                Get Started Today
+            </a > 
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="mb-4">© 2023 DigitalTrust. All rights reserved.</p>
+            <p class="text-sm">
+                Empowering secure digital interactions worldwide.
+            </p>
+        </div>
+    </footer>
+ </body>
   </html>
   
+
+
+
+
+

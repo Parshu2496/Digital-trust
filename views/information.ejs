@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Information - DigitalTrust</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .info-bg {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .info-card {
+            transition: transform 0.3s ease;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Hero Section -->
+    <section class="info-bg text-white py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl font-bold mb-6">DigitalTrust Information Hub</h1>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">
+                Discover everything you need to know about our secure digital tools. From email validation to captcha solving, explore the details that make us your trusted partner.
+            </p>
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ff904201-1a8d-4dfa-9c5a-8138ed0eb170.png" alt="Central information hub interface with icons for data, security, and tools displaying various options for digital trust features" class="rounded-lg shadow-lg mx-auto max-w-full" />
+        </div>
+    </section>
+    
+    <!-- Features Information Section -->
+    <%- include('nav') %>
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12">Learn About Our Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                
+                <!-- Email Validator Info -->
+                <div class="info-card bg-gradient-to-br from-teal-400 to-cyan-500 p-8 rounded-xl shadow-lg text-white">
+                    <h3 class="text-3xl font-semibold mb-4">Email Validator</h3>
+                    <p class="mb-6 text-lg">
+                        Our Email Validator uses advanced algorithms to check the syntax, domain validity, and mailbox existence of email addresses. It helps reduce bounce rates and ensures your communications reach the intended recipients.
+                    </p>
+                    <ul class="list-disc list-inside mb-6">
+                        <li>Syntax verification</li>
+                        <li>Domain blacklisting</li>
+                        <li>Real-time API access</li>
+                        <li>Batch processing support</li>
+                    </ul>
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/427cfa3d-a563-44e0-b68e-8d90d4f38b49.png" alt="Flowchart diagram illustrating the step-by-step process of email validation including syntax check, domain validation, and deliverability test" class="rounded-lg" />
+                </div>
+
+                <!-- Captcha Solver Info -->
+                <div class="info-card bg-gradient-to-br from-orange-400 to-red-500 p-8 rounded-xl shadow-lg text-white">
+                    <h3 class="text-3xl font-semibold mb-4">Captcha Solver</h3>
+                    <p class="mb-6 text-lg">
+                        Our Captcha Solver employs machine learning techniques to bypass various captcha types efficiently. It's designed for developers looking to automate processes without compromising security.
+                    </p>
+                    <ul class="list-disc list-inside mb-6">
+                        <li>Support for multiple captcha types</li>
+                        <li>High accuracy AI model</li>
+                        <li>Fast response times</li>
+                        <li>Integration-friendly API</li>
+                    </ul>
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3e079801-004f-4e9f-8e80-32522eee93be.png" alt="Diagram showing various captcha forms being processed by AI algorithms with elements like neural networks and unlock icons" class="rounded-lg" />
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12">How It Works</h2>
+            <div class="text-center mb-8">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c88b98b3-d013-4c6d-9df1-67b2d8a59164.png" alt="Step-by-step infographic showing the workflow: upload data, process through tools, receive validated results, all connected by arrows" class="rounded-lg shadow-lg mx-auto max-w-full" />
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">1</div>
+                    <h3 class="text-2xl font-semibold mb-2">Input Your Data</h3>
+                    <p>Upload or enter the email addresses or captcha URLs you want to process.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">2</div>
+                    <h3 class="text-2xl font-semibold mb-2">AI Processing</h3>
+                    <p>Our tools analyze and validate the data using cutting-edge technology.</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">3</div>
+                    <h3 class="text-2xl font-semibold mb-2">Get Results</h3>
+                    <p>Receive detailed reports and validated outputs instantly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 info-bg text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-bold mb-6">Ready to Explore?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">
+                Dive deeper into our tools or contact us for more details on how DigitalTrust can secure your digital operations.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6 text-center space-y-4">
+            <p>© 2023 DigitalTrust. All rights reserved.</p>
+            <p>Providing clarity and security in the digital age.</p>
+            <div class="flex justify-center space-x-8 mt-4 flex-wrap justify-center">
+                <div class="flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-9 8v-6" />
+                    </svg>
+                    <a href="mailto:support@digitaltrust.com" class="hover:underline">Prashantnrwd@gmail.com</a>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h2l3.6 7.59-1.35 2.44a11.05 11.05 0 005.15 5.15l2.44-1.35L19 19v2a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z" />
+                    </svg>
+                    <a href="tel:+1234567890" class="hover:underline">+91 7276341636</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
