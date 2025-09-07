@@ -30,7 +30,7 @@ app.get('/captcha', (req, res) => {
 // Verify reCAPTCHA on captcha form submission
 var Recaptcha = require('recaptcha-verify');
 var recaptcha = new Recaptcha({
-    secret: "6LflKcErAAAAAIQVg2kDWGghWVIEJABm9OPetSFX",
+    secret: "6LfnQMErAAAAAL7b7LTVk4pw5jBL2y1Ek7664Hh6",
     verbose: true
 });
 app.get('/check', function(req, res){
