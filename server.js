@@ -34,8 +34,10 @@ app.get('/information',(req,res)=>{
   res.render('information.ejs')
 })
 // Verify reCAPTCHA on captcha form submission
-const recaptcha = new Recaptcha({
-    secret: "6LflKcErAAAAAIQVg2kDWGghWVIEJABm9OPetSFX",
+
+
+var recaptcha = new Recaptcha({
+    secret: "6Lf3QMErAAAAAOFH0KO4XmG942NS1xLG5GKZ4yHT",
     verbose: true
 });
 app.get('/check', function(req, res){
