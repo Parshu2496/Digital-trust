@@ -13,10 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       const data = await response.json();
       const statusDiv = document.getElementById('Verficationstatus');
+
       statusDiv.innerHTML = `
         Name: ${data.uname}<br>
+        Email validation: ${data.validateEmail}<br>
         Disposable Check: ${data.validateWithDisposableCheck}<br>
-        Detailed: ${data.getDetailedValidation.valid}<br>
+        Detailed: ${data.getDetailedValidation ? data.getDetailedValidation.valid : 'N/A'}<br>
         Custom Options: ${data.validateWithCustomOptions}<br>
         Format Only: ${data.validateFormatOnly}
       `;

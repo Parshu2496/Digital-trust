@@ -1,10 +1,14 @@
-// Import the http module
 const http = require("http");
 const fs = require('fs')
 const express = require('express');
+const emailValidator = require('node-email-verifier');
 const path = require('path');
+const { VerifaliaRestClient } = require('verifalia');
 const app = express();
 const port = 8080;
+const Recaptcha = require('recaptcha-verify');
+// const { VerifaliaRestClient } = require('@verifalia/verifalia-js-sdk');
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -30,8 +34,7 @@ app.get('/information',(req,res)=>{
   res.render('information.ejs')
 })
 // Verify reCAPTCHA on captcha form submission
-var Recaptcha = require('recaptcha-verify');
-var recaptcha = new Recaptcha({
+const recaptcha = new Recaptcha({
     secret: "6LflKcErAAAAAIQVg2kDWGghWVIEJABm9OPetSFX",
     verbose: true
 });
@@ -75,12 +78,14 @@ app.post('/validate-email', async (req, res) => {
     const { uname } = req.body;
     try {
         const username = uname;
+        const checkemail = await validateEmail(uname);
         const disposableCheck = await validateWithDisposableCheck(uname);
         const detailed = await getDetailedValidation(uname);
         const customOptions = await validateWithCustomOptions(uname);
         const formatOnly = await validateFormatOnly(uname);
         res.json({
             uname: username,
+            validateEmail: checkemail,
             validateWithDisposableCheck: disposableCheck,
             getDetailedValidation: detailed,
             validateWithCustomOptions: customOptions,
@@ -91,24 +96,40 @@ app.post('/validate-email', async (req, res) => {
     }
 });
 
+// Email checker 
+// Create a new client instance with your Verifalia credentials
+const verifalia = new VerifaliaRestClient({
+  username: 'prashant2496',
+  password: 'hitman45'
+});
 
-const emailValidator = require('node-email-verifier');
-
-// Basic validation (format + MX checking)
+// Async function to validate an email
 async function validateEmail(email) {
   try {
-    const isValid = await emailValidator(email);
-    // console.log(`Is "${email}" valid?`, isValid);
+    // Submit the email for validation
+    const result = await verifalia.emailValidations.submit(email);
+
+    // Get the first validation entry
+    const entry = result.entries[0];
+
+    // Log the classification and status
+    console.log(`${entry.classification} (${entry.status})`);
+
+    // Return the full entry if you want to use it elsewhere
+    return entry.status;
   } catch (error) {
     console.error('Validation error:', error);
+    throw error;
   }
 }
+
 
 // Disposable email detection
 async function validateWithDisposableCheck(email) {
   try {
     const isValid = await emailValidator(email, {
       checkDisposable: true,
+      checkMx: false, // Disable MX check to avoid SMTP connection
     });
     // console.log(`Is "${email}" valid (blocking disposable)?`, isValid);
     return isValid;
@@ -123,6 +144,7 @@ async function getDetailedValidation(email) {
     const result = await emailValidator(email, {
       detailed: true,
       checkDisposable: true,
+      checkMx: false, // Disable MX check to avoid SMTP connection
     });
     // console.log('Detailed validation result:', result);
     return result;
@@ -133,8 +155,8 @@ async function getDetailedValidation(email) {
       email: 'test@10minutemail.com',
       format: { valid: true },
       mx: { valid: true, records: [...] },
-      disposable: { 
-        valid: false, 
+      disposable: {
+        valid: false,
         provider: '10minutemail.com',
         reason: 'Email from disposable provider'
       }
