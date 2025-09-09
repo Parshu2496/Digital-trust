@@ -35,7 +35,7 @@ app.get('/information',(req,res)=>{
 // Verify reCAPTCHA on captcha form submission
 
 const recaptcha = new Recaptcha({
-    secret: "6Lej8sIrAAAAAH9eKmnGexGIvT0gWbRdiwtPh9EJ",
+    secret: "6LdTc8MrAAAAAAq2tn6E0wGbWbYPhpQbgJus2MIS",
     verbose: true
 });
 
