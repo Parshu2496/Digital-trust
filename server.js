@@ -33,6 +33,7 @@ app.get('/information',(req,res)=>{
   res.render('information.ejs')
 })
 // Verify reCAPTCHA on captcha form submission
+
 const recaptcha = new Recaptcha({
     secret: "6Lej8sIrAAAAAH9eKmnGexGIvT0gWbRdiwtPh9EJ",
     verbose: true
