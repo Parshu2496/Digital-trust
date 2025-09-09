@@ -17,7 +17,6 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.render('home.ejs');
 });
-
 app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);
 });
