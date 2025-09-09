@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const response = await fetch('/validate-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ uname: email })
+        body: JSON.stringify({ uname: email, captchaResponse })
       });
       const data = await response.json();
       const statusDiv = document.getElementById('Verficationstatus');

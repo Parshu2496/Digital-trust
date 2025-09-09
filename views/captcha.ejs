@@ -22,16 +22,16 @@
         .container{
             display: flex;
             flex-direction: column;
-            border: solid rgb(0, 22, 56) 2px;
+            border: solid black 2px;
             border-radius: 10px;
-            width: 40vw;
-            height: 40vh;
-            background-color: rgb(0, 6, 92);
+            width: 60vw;
+            height: 70vh;
+            background-color: rgb(221, 252, 255);
             margin: auto;
-            /* margin-top: 10vh; */
-            /* overflow: auto; */
+            margin-top: 10vh;
+            overflow: auto;
         }
-        .form{
+        form{
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -62,8 +62,14 @@
             justify-content: center;
             align-self: center;
         }
-        #inputbox{
+        #inputbox1,#inputbox2{
             border-radius: 10px;
+        }
+        #captcha{
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            color: green;
         }
         </style>
         <script
@@ -76,14 +82,18 @@
 <body>
     <%- include('nav') %>
     <div class="container">
-        <form action="" class="form" >
-            <input type="text" class="firstinput" id="inputbox" placeholder="Email "/>
-            <input type="password" class="secondinput" id="inputbox" placeholder="Password" />
+        <form action="/"  method="post" >
+            <label for="uname" class="form-label"></label>
+            <input name = "uname" class="firstinput" type="text" class="form-control" id="inputbox1" placeholder="Email"/>
+            <input type="password" class="secondinput" id="inputbox2"  placeholder="Password" />
             <label>
             <input type="checkbox" id="showPass" /> Show Password
             </label>
-            <div class="g-recaptcha" data-sitekey="6Lf3QMErAAAAAAS8vSPWfzVlnkDBg3ztp0gJsXbn"></div>
-            <input type="submit" class="submitbutton">
+            <div class="g-recaptcha" data-sitekey="6Lej8sIrAAAAANX793Zh2sjlnN_PjjOx1XtkdDYy"></div>
+            <button  type="submit" class="btn btn-primary">Submit</button>
+            <p id="captcha"></p>
+            <p id="Verficationstatus"></p>
+
             <p id="status"></p>
     </div>
 </form>

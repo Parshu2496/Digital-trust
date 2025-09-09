@@ -7,7 +7,6 @@ const { VerifaliaRestClient } = require('verifalia');
 const app = express();
 const port = 8080;
 const Recaptcha = require('recaptcha-verify');
-// const { VerifaliaRestClient } = require('@verifalia/verifalia-js-sdk');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set("view engine", "ejs");
@@ -26,20 +25,32 @@ app.get('/emailvalidator', (req, res) => {
   res.render('emailvalidator.ejs');
 });
 
-// Render the captcha form with reCAPTCHA
 app.get('/captcha', (req, res) => {
   res.render('captcha.ejs');
 });
+
 app.get('/information',(req,res)=>{
   res.render('information.ejs')
 })
 // Verify reCAPTCHA on captcha form submission
 
-
-var recaptcha = new Recaptcha({
-    secret: "6Lf3QMErAAAAAOFH0KO4XmG942NS1xLG5GKZ4yHT",
+const recaptcha = new Recaptcha({
+    secret: "6Lej8sIrAAAAAH9eKmnGexGIvT0gWbRdiwtPh9EJ",
     verbose: true
 });
+
+// Helper function to promisify recaptcha check
+function checkRecaptchaAsync(response) {
+    return new Promise((resolve, reject) => {
+        recaptcha.checkResponse(response, (error, result) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+}
 app.get('/check', function(req, res){
     // get the user response (from reCAPTCHA)
     var userResponse = req.query['g-recaptcha-response'];
@@ -60,52 +71,56 @@ app.get('/check', function(req, res){
         }
     });
 });
-app.post('/validate-captcha', (req, res) => {
-  const { uname, captchaResponse } = req.body;
-  if (!captchaResponse) {
-    return res.status(400).json({ message: 'Captcha response is required' });
-  }
-  recaptcha.checkResponse(captchaResponse, function(error, response) {
-    if (error) {
-      return res.status(400).json({ message: 'Error validating captcha' });
-    }
-    if (response.success) {
-      res.json({ message: 'You are human' });
-    } else {
-      res.json({ message: 'You are a robot' });
-    }
-  });
-});
+
 app.post('/validate-email', async (req, res) => {
-    const { uname } = req.body;
+    const { uname, captchaResponse } = req.body;
     try {
-        const username = uname;
-        const checkemail = await validateEmail(uname);
-        const disposableCheck = await validateWithDisposableCheck(uname);
-        const detailed = await getDetailedValidation(uname);
-        const customOptions = await validateWithCustomOptions(uname);
-        const formatOnly = await validateFormatOnly(uname);
-        res.json({
-            uname: username,
-            validateEmail: checkemail,
-            validateWithDisposableCheck: disposableCheck,
-            getDetailedValidation: detailed,
-            validateWithCustomOptions: customOptions,
-            validateFormatOnly: formatOnly
-        });
+        if (!captchaResponse) {
+            return res.status(400).json({ message: 'Captcha response is required' });
+        }
+
+        // Check captcha first using promisified function
+        const captchaResult = await checkRecaptchaAsync(captchaResponse);
+
+        if (!captchaResult.success) {
+            return res.json({
+                uname: uname,
+                captchaValid: false,
+                message: 'Captcha validation failed - you might be a robot'
+            });
+        }
+
+        // If captcha is valid, proceed with email validation
+        try {
+            const username = uname;
+            const checkemail = await validateEmail(uname);
+            const disposableCheck = await validateWithDisposableCheck(uname);
+            const detailed = await getDetailedValidation(uname);
+            const customOptions = await validateWithCustomOptions(uname);
+            const formatOnly = await validateFormatOnly(uname);
+
+            res.json({
+                uname: username,
+                captchaValid: true,
+                validateEmail: checkemail,
+                validateWithDisposableCheck: disposableCheck,
+                getDetailedValidation: detailed,
+                validateWithCustomOptions: customOptions,
+                validateFormatOnly: formatOnly
+            });
+        } catch (emailError) {
+            res.status(500).json({ error: 'Email validation failed: ' + emailError.message });
+        }
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
 
 // Email checker 
-// Create a new client instance with your Verifalia credentials
 const verifalia = new VerifaliaRestClient({
-  username: 'prashant2496',
-  password: 'hitman45'
+  username: 'atharva@',
+  password: 'atharva7'
 });
-
-// Async function to validate an email
 async function validateEmail(email) {
   try {
     // Submit the email for validation
@@ -148,22 +163,7 @@ async function getDetailedValidation(email) {
       checkDisposable: true,
       checkMx: false, // Disable MX check to avoid SMTP connection
     });
-    // console.log('Detailed validation result:', result);
     return result;
-    /*
-    Example output:
-    {
-      valid: false,
-      email: 'test@10minutemail.com',
-      format: { valid: true },
-      mx: { valid: true, records: [...] },
-      disposable: {
-        valid: false,
-        provider: '10minutemail.com',
-        reason: 'Email from disposable provider'
-      }
-    }
-    */
   } catch (error) {
     // console.error('Validation error:', error);
     return { valid: false, error: error.message }; // Return an error object

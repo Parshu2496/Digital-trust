@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>emailvalidator</title>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
         <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         rel="stylesheet"
@@ -42,10 +43,13 @@
     <body>
         <%- include('nav') %>
         <div class="container">
-            <form action="/" method = "post">
+            <form action="" method = "post">
                 <div class="mb-3">
                     <label for="uname" class="form-label">Email address: </label>
                     <input name = "uname" type="text" class="form-control" id="name"/>
+                </div>
+                <div class="mb-3">
+                    <div class="g-recaptcha" data-sitekey="6Lej8sIrAAAAANX793Zh2sjlnN_PjjOx1XtkdDYy"></div>
                 </div>
                 <p>Email Verfication:</p>
                 <p id="Verficationstatus"></p>

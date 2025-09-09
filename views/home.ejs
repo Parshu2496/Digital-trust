@@ -30,6 +30,11 @@
       body{
         background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 27%, rgba(0, 212, 255, 1) 100%);
       }
+      #mainbox{
+        display: flex;
+        flex-direction: row;
+        align-self: center;
+      }
       </style>
       <script src="https://cdn.tailwindcss.com"></script>
     <script
@@ -57,22 +62,16 @@
     <section class="py-20 bg-white">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-bold text-center mb-12">Our Core Features</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-
-                <!-- Email Validator Feature -->
-                <div class="feature-card bg-gradient-to-br from-green-400 to-blue-500 p-8 rounded-xl shadow-lg text-white">
-                    <h3 class="text-3xl font-semibold mb-4"><a href="/emailvalidator">Email Validator</a></h3>
-                    <p class="mb-6 text-lg">
-                        Ensure the authenticity and deliverability of your email addresses with our advanced email validation tool. Eliminate ineffective contacts and enhance your communication strategies.
-                    </p>
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/275d7e44-9c25-44dc-bcb3-ceb5aa80523a.png" alt="Graphic representation of email validation with icons of envelopes, checkmarks, and arrows showing the process of verifying email authenticity" class="rounded-lg" />
-                </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12" id="mainbox">
 
                 <!-- Captcha Solver Feature -->
                 <div class="feature-card bg-gradient-to-br from-purple-500 to-pink-500 p-8 rounded-xl shadow-lg text-white">
-                    <h3 class="text-3xl font-semibold mb-4"><a href="/captcha">Captcha Solver</a> </h3>
+                    <h3 class="text-3xl font-semibold mb-4"><a href="/captcha">Model</a> </h3>
                     <p class="mb-6 text-lg">
                         Overcome captcha challenges effortlessly with our intelligent solver. Designed to streamline automated processes while maintaining security standards.
+                    </p>
+                    <p class="mb-6 text-lg">
+                        Ensure the authenticity and deliverability of your email addresses with our advanced email validation tool. Eliminate ineffective contacts and enhance your communication strategies.
                     </p>
                     <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/febe0651-8bbe-4fd3-9a20-b9c734ae2d17.png" alt="Visual of captcha puzzles being solved with AI elements, gears, and digital locks unlocking to represent solving mechanisms" class="rounded-lg" />
                 </div>
