@@ -2,14 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('form');
   const captchares = document.querySelector('.captcha');
   const input1 = document.querySelector('.firstinput');
-  const input2 = document.querySelector('.secondinput');
   const statusDiv = document.getElementById('status');
   const verificationDiv = document.getElementById('Verficationstatus');
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const email = input1.value.trim();
-    const pass = input2.value.trim();
     const captchaResponse = grecaptcha.getResponse();
 
     // Clear previous messages
@@ -17,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     verificationDiv.innerHTML = '';
 
     // Validate inputs
-    if (!email || !pass) {
-      verificationDiv.innerHTML = 'Please enter email and password.';
+    if (!email) {
+      verificationDiv.innerHTML = 'Please enter email.';
       return;
     }
     if (!captchaResponse) {
@@ -58,14 +56,5 @@ document.addEventListener('DOMContentLoaded', () => {
       statusDiv.innerHTML = 'Error validating captcha.';
     }
   });
-});
-const passwordInput = document.querySelector('.secondinput');
-const showPassCheckbox = document.getElementById('showPass');
-showPassCheckbox.addEventListener('change', () => {
-    if (showPassCheckbox.checked) {
-      passwordInput.type = 'text';
-    } else {
-      passwordInput.type = 'password';
-    }
 });
 
