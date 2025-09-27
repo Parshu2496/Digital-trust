@@ -21,19 +21,15 @@ app.listen(port, () => {
   console.log(`Example app listening on port http://localhost:${port}`);
 });
 
-app.get('/emailvalidator', (req, res) => {
-  res.render('emailvalidator.ejs');
-});
-
-app.get('/captcha', (req, res) => {
-  res.render('captcha.ejs');
+app.get('/feature', (req, res) => {
+  res.render('feature.ejs');
 });
 
 app.get('/information',(req,res)=>{
   res.render('information.ejs')
 })
-// Verify reCAPTCHA on captcha form submission
 
+// Verify reCAPTCHA on captcha form submission
 const recaptcha = new Recaptcha({
     secret: "6LdTc8MrAAAAAAq2tn6E0wGbWbYPhpQbgJus2MIS",
     verbose: true
