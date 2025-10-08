@@ -1,0 +1,4 @@
+- [x] Modify server.py to accept CLI arguments (email, subject, body) and output JSON result
+- [x] Add new POST /advanced-analyze endpoint in server.js to call Python script and return result
+- [x] Test the integration by running the server and calling the endpoint (Note: Python dependencies may need manual installation if pip is not available)
+- [x] Ensure Python dependencies are installed (pip install requests colorama scikit-learn whois dnspython joblib pandas)

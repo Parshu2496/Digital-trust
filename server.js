@@ -4,6 +4,7 @@ const express = require('express');
 const emailValidator = require('node-email-verifier');
 const path = require('path');
 const { VerifaliaRestClient } = require('verifalia');
+const { exec } = require('child_process');
 const app = express();
 const port = 8080;
 const Recaptcha = require('recaptcha-verify');
@@ -112,7 +113,25 @@ app.post('/validate-email', async (req, res) => {
     }
 });
 
-// Email checker 
+app.post('/advanced-analyze', (req, res) => {
+    const { email, subject, body } = req.body;
+    if (!email || !subject || !body) {
+        return res.status(400).json({ error: 'email, subject, and body are required' });
+    }
+    exec(`python server.py "${email}" "${subject}" "${body}"`, { cwd: __dirname }, (error, stdout, stderr) => {
+        if (error) {
+            return res.status(500).json({ error: 'Python script error', details: error.message });
+        }
+        try {
+            const result = JSON.parse(stdout);
+            res.json(result);
+        } catch (parseError) {
+            res.status(500).json({ error: 'Failed to parse Python output', details: parseError.message });
+        }
+    });
+});
+
+// Email checker
 const verifalia = new VerifaliaRestClient({
   username: 'atharva@',
   password: 'atharva7'
